@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:todoeyflutter/components/task.dart';
+import 'package:todoeyflutter/components/tasks_list.dart';
 import 'package:todoeyflutter/themes/main.dart';
 
 class TasksScreen extends StatelessWidget {
@@ -10,15 +10,6 @@ class TasksScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MainTheme.kPrimaryColor,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: MainTheme.kPrimaryColor,
-        child: Icon(
-          Icons.add,
-          color: MainTheme.kSecondColor,
-          size: 50,
-        ),
-      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
@@ -60,6 +51,9 @@ class TasksScreen extends StatelessWidget {
           ),
           Expanded(
             child: Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 30,
+              ),
               height: 300,
               decoration: BoxDecoration(
                 color: MainTheme.kSecondColor,
@@ -68,25 +62,19 @@ class TasksScreen extends StatelessWidget {
                   topLeft: Radius.circular(25),
                 ),
               ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 50,
-                ),
-                child: ListView(
-                  children: <Widget>[
-                    Task(text: 'test'),
-                    Task(text: 'test'),
-                    Task(text: 'test'),
-                    Task(text: 'test'),
-                    Task(text: 'test'),
-                    Task(text: 'test'),
-                    Task(text: 'test'),
-                  ],
-                ),
-              ),
+              child: TasksList(),
             ),
           )
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: MainTheme.kPrimaryColor,
+        child: Icon(
+          Icons.add,
+          color: MainTheme.kSecondColor,
+          size: 50,
+        ),
       ),
     );
   }
