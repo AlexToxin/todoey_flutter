@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todoeyflutter/components/task.dart';
 import 'package:todoeyflutter/themes/main.dart';
 
 class TasksScreen extends StatelessWidget {
@@ -65,6 +66,22 @@ class TasksScreen extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                   topRight: Radius.circular(25),
                   topLeft: Radius.circular(25),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 50,
+                ),
+                child: ListView(
+                  children: <Widget>[
+                    Task(text: 'test'),
+                    Task(text: 'test'),
+                    Task(text: 'test'),
+                    Task(text: 'test'),
+                    Task(text: 'test'),
+                    Task(text: 'test'),
+                    Task(text: 'test'),
+                  ],
                 ),
               ),
             ),
