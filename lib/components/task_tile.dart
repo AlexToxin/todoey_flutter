@@ -32,7 +32,7 @@ class _TaskTileState extends State<TaskTile> {
             widget._checked = value;
           });
         },
-        focusColor: MainTheme.kTextColor,
+        activeColor: MainTheme.kPrimaryColor,
       ),
     );
   }
