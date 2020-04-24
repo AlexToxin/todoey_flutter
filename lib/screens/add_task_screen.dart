@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:todoeyflutter/themes/main.dart';
 
 class AddTaskScreen extends StatelessWidget {
+  final Function onClick;
+
+  AddTaskScreen({this.onClick});
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
         padding:
-            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         color: Color(0xFF757575),
         child: Container(
           decoration: BoxDecoration(
@@ -41,7 +45,7 @@ class AddTaskScreen extends StatelessWidget {
                 ),
                 FlatButton(
                   color: MainTheme.kPrimaryColor,
-                  onPressed: () {},
+                  onPressed: onClick,
                   child: Text(
                     'Add',
                     style: MainTheme.kSubtitleTextStyle,
