@@ -9,10 +9,15 @@ class AddTaskScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String newTaskText;
+
     return SingleChildScrollView(
       child: Container(
         padding:
-        EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        EdgeInsets.only(bottom: MediaQuery
+            .of(context)
+            .viewInsets
+            .bottom),
         color: Color(0xFF757575),
         child: Container(
           decoration: BoxDecoration(
@@ -39,13 +44,19 @@ class AddTaskScreen extends StatelessWidget {
                   autofocus: true,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(),
+                  onChanged: (value) {
+                    newTaskText = value;
+                  },
                 ),
                 SizedBox(
                   height: 15,
                 ),
                 FlatButton(
                   color: MainTheme.kPrimaryColor,
-                  onPressed: onClick,
+                  onPressed: () {
+                    onClick(newTaskText);
+                    Navigator.pop(context);
+                  },
                   child: Text(
                     'Add',
                     style: MainTheme.kSubtitleTextStyle,

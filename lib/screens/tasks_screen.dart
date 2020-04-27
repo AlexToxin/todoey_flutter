@@ -1,11 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todoeyflutter/components/tasks_list.dart';
+import 'package:todoeyflutter/models/task.dart';
 import 'package:todoeyflutter/screens/add_task_screen.dart';
 import 'package:todoeyflutter/themes/main.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
   static final id = 'tasks_screen';
+
+  @override
+  _TasksScreenState createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+  List<Task> tasks = [
+    Task(text: 'test'),
+    Task(text: 'test'),
+    Task(text: 'test'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +53,7 @@ class TasksScreen extends StatelessWidget {
                   style: MainTheme.kTitleTextStyle,
                 ),
                 Text(
-                  '12 Tasks',
+                  '${tasks.length} Tasks',
                   style: MainTheme.kSubtitleTextStyle,
                 ),
               ],
@@ -63,7 +75,7 @@ class TasksScreen extends StatelessWidget {
                   topLeft: Radius.circular(25),
                 ),
               ),
-              child: TasksList(),
+              child: TasksList(tasks: tasks),
             ),
           )
         ],
@@ -73,7 +85,14 @@ class TasksScreen extends StatelessWidget {
           showModalBottomSheet(
             isScrollControlled: true,
             context: context,
-            builder: (context) => AddTaskScreen(),
+            builder: (context) =>
+                AddTaskScreen(
+                  onClick: (taskText) {
+                    setState(() {
+                      tasks.add(Task(text: taskText));
+                    });
+                  },
+                ),
           );
         },
         backgroundColor: MainTheme.kPrimaryColor,

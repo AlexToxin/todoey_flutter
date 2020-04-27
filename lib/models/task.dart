@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
+
 class Task {
   final String text;
   bool isDone;
 
-  Task({this.text, this.isDone = false});
+  Task({@required this.text, this.isDone = false});
 
   void toggleDone() {
     isDone = !isDone;
