@@ -1,23 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todoeyflutter/components/tasks_list.dart';
-import 'package:todoeyflutter/models/task.dart';
+import 'package:todoeyflutter/models/task_data.dart';
 import 'package:todoeyflutter/screens/add_task_screen.dart';
 import 'package:todoeyflutter/themes/main.dart';
 
-class TasksScreen extends StatefulWidget {
+class TasksScreen extends StatelessWidget {
   static final id = 'tasks_screen';
-
-  @override
-  _TasksScreenState createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
-  List<Task> tasks = [
-    Task(text: 'test'),
-    Task(text: 'test'),
-    Task(text: 'test'),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +43,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   style: MainTheme.kTitleTextStyle,
                 ),
                 Text(
-                  '${tasks.length} Tasks',
+                  '${Provider.of<TaskData>(context).taskCount} Tasks',
                   style: MainTheme.kSubtitleTextStyle,
                 ),
               ],
@@ -75,7 +65,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   topLeft: Radius.circular(25),
                 ),
               ),
-              child: TasksList(tasks: tasks),
+              child: TasksList(),
             ),
           )
         ],
@@ -85,14 +75,11 @@ class _TasksScreenState extends State<TasksScreen> {
           showModalBottomSheet(
             isScrollControlled: true,
             context: context,
-            builder: (context) =>
-                AddTaskScreen(
-                  onClick: (taskText) {
-                    setState(() {
-                      tasks.add(Task(text: taskText));
-                    });
-                  },
-                ),
+            builder: (context) => AddTaskScreen(
+              onClick: (taskText) {
+                Provider.of<TaskData>(context, listen: false).addTask(taskText);
+              },
+            ),
           );
         },
         backgroundColor: MainTheme.kPrimaryColor,
