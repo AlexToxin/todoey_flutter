@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todoeyflutter/models/task.dart';
 import 'package:todoeyflutter/themes/main.dart';
 
 class TaskTile extends StatefulWidget {
-  final String text;
-  bool _checked = false;
+  final Task task;
 
-  TaskTile({this.text});
+  TaskTile({this.task});
 
   @override
   _TaskTileState createState() => _TaskTileState();
@@ -18,18 +18,16 @@ class _TaskTileState extends State<TaskTile> {
     return ListTile(
       contentPadding: EdgeInsets.all(0),
       title: Text(
-        widget.text,
+        widget.task.text,
         style: MainTheme.kItemTextStyle.copyWith(
-          decoration: widget._checked
-              ? TextDecoration.lineThrough
-              : TextDecoration.none,
+          decoration: widget.task.isDone ? TextDecoration.lineThrough : null,
         ),
       ),
       trailing: Checkbox(
-        value: widget._checked,
+        value: widget.task.isDone,
         onChanged: (bool value) {
           setState(() {
-            widget._checked = value;
+            widget.task.toggleDone();
           });
         },
         activeColor: MainTheme.kPrimaryColor,
