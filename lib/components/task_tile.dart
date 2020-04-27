@@ -3,32 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:todoeyflutter/models/task.dart';
 import 'package:todoeyflutter/themes/main.dart';
 
-class TaskTile extends StatefulWidget {
+class TaskTile extends StatelessWidget {
   final Task task;
+  final Function callback;
 
-  TaskTile({this.task});
+  TaskTile({@required this.task, this.callback});
 
-  @override
-  _TaskTileState createState() => _TaskTileState();
-}
-
-class _TaskTileState extends State<TaskTile> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.all(0),
       title: Text(
-        widget.task.text,
+        task.text,
         style: MainTheme.kItemTextStyle.copyWith(
-          decoration: widget.task.isDone ? TextDecoration.lineThrough : null,
+          decoration: task.isDone ? TextDecoration.lineThrough : null,
         ),
       ),
       trailing: Checkbox(
-        value: widget.task.isDone,
-        onChanged: (bool value) {
-          setState(() {
-            widget.task.toggleDone();
-          });
+        value: task.isDone,
+        onChanged: (value) {
+          callback();
         },
         activeColor: MainTheme.kPrimaryColor,
       ),
