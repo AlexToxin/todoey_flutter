@@ -5,13 +5,21 @@ import 'package:todoeyflutter/themes/main.dart';
 
 class TaskTile extends StatelessWidget {
   final Task task;
-  final Function callback;
+  final Function checkboxCallback;
+  final Function longPressCallback;
 
-  TaskTile({@required this.task, this.callback});
+  TaskTile(
+      {@required this.task, this.checkboxCallback, this.longPressCallback});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onLongPress: () {
+        longPressCallback();
+      },
+      onTap: () {
+        checkboxCallback();
+      },
       contentPadding: EdgeInsets.all(0),
       title: Text(
         task.text,
@@ -22,7 +30,7 @@ class TaskTile extends StatelessWidget {
       trailing: Checkbox(
         value: task.isDone,
         onChanged: (value) {
-          callback();
+          checkboxCallback();
         },
         activeColor: MainTheme.kPrimaryColor,
       ),

@@ -27,4 +27,9 @@ class TaskData extends ChangeNotifier {
     task.toggleDone();
     notifyListeners();
   }
+
+  deleteTask(Task task) {
+    _list.remove(task);
+    notifyListeners();
+  }
 }
